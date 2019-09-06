@@ -15,7 +15,7 @@ contract FlightSuretyData {
 
     uint private balance = 0;                                           // contract insurance balance
     uint registrationFee = 10;                                          // airline registration fees default is 10
-    address[] public multicalls = new address[](0);                     // multicalls consensus
+    address[] public multiSig = new address[](0);                       // multiSig consensus
     mapping(string => uint) private totalFlightInsurance;               // total insurance amount in flight
     mapping (address =>uint) private insurancePay;                      // passengers insurance payouts
 
@@ -112,6 +112,11 @@ contract FlightSuretyData {
         operational = mode;
     }
 
+    function kill() external requireContractOwner
+    {
+        selfdestruct(contractOwner);
+    }
+
     function setRegistrationFee(uint _amt) external requireContractOwner
     {
         registrationFee = _amt;
@@ -172,20 +177,20 @@ contract FlightSuretyData {
         return registeredAirlines;
     }
 
-    function getMultiCallsLenght() public view returns(uint){
-        return multicalls.length;
+    function getMultiSigs() public view returns(uint){
+        return multiSig.length;
     }
 
-    function setMultiCalls(address _address) public {
-        multicalls.push(_address);
+    function setMultiSig(address _address) public {
+        multiSig.push(_address);
     }
 
-    function getMultiCalls(uint _index) public view returns (address){
-        return multicalls[_index];
+    function getMultiSig(uint _index) public view returns (address){
+        return multiSig[_index];
     }
 
-    function clearMultiCalls() public{
-        multicalls = new address[](0);
+    function clearMultiSig() public{
+        multiSig = new address[](0);
     }
 
     function isRegistrationFeePaid(address _address) public view requireIsOperational returns (bool){

@@ -100,7 +100,7 @@ contract FlightSuretyApp {
     */
     function registerAirline(address _address)external requireIsOperational returns(bool success, uint256 votes)
     {
-        require(flightSuretyData.isAirlineRegistered(msg.sender),"Caller is not registered");
+        require(flightSuretyData.isAirlineRegistered(msg.sender),"Airline is not registered");
         require(flightSuretyData.isRegistrationFeePaid(msg.sender),"Registration Fee is not paid");
         require(!flightSuretyData.isAirlineRegistered(_address),"Airline is already registered");
 
@@ -108,23 +108,24 @@ contract FlightSuretyApp {
 
         if(registeredAirlines >= VOTE){
             bool duplicate = false;
-            for(uint i = 0; i < flightSuretyData.getMultiCallsLenght(); i++)
+            for(uint i = 0; i < flightSuretyData.getMultiSigs(); i++)
             {
-                if(flightSuretyData.getMultiCalls(i) == msg.sender){
+                if(flightSuretyData.getMultiSig(i) == msg.sender){
                     duplicate = true;
                     break;
                 }
             }
             require(!duplicate, "Duplicate function call by Caller");
 
-            flightSuretyData.setMultiCalls(msg.sender);
-            if(flightSuretyData.getMultiCallsLenght() >= VOTE.div(2)){
-                votes = flightSuretyData.getMultiCallsLenght();
-                flightSuretyData.clearMultiCalls();
-                flightSuretyData.registerAirline(msg.sender);
+            flightSuretyData.setMultiSig(msg.sender);
+            if(flightSuretyData.getMultiSigs() >= VOTE.div(2)){
+                votes = flightSuretyData.getMultiSigs();
+                flightSuretyData.clearMultiSig();
+                flightSuretyData.registerAirline(_address);
             }
          }else{
-             flightSuretyData.registerAirline(msg.sender);
+            
+            flightSuretyData.registerAirline(_address);
          }
         return(success,votes);
     }
