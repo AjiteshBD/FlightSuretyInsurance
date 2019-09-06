@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>FlightSurety</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--TEst-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
@@ -20,14 +23,89 @@
         </button>
     </nav>
 
-    <main class="container">
 
-        <div id="display-wrapper" class="top-20">
+<div id="display-wrapper" class="top-20">
+</div>
+<div class="row top-20">
+ <label class="form">Flight</label> <input type="text" id="flight-number"> <btn class="btn btn-primary" id="submit-oracle">Submit to Oracles</btn>
+</div> 
+     <div class="bgimg w3-display-container w3-text-white " style="margin-left: 350px;">
+       
+        <div class="w3-display-topleft w3-container w3-xlarge" style="margin-top: 50px;">
+          <button onclick="document.getElementById('airline').style.display='block'" class="w3-button w3-cyan" style="border-radius: 5px">Airlines</button>
+          <button onclick="document.getElementById('passenger').style.display='block'" class="w3-button w3-cyan" style="border-radius: 5px">Passengers</button>
         </div>
-        <!-- <div class="row top-20">
-            <label class="form">Flight</label> <input type="text" id="flight-number"> <btn class="btn btn-primary" id="submit-oracle">Submit to Oracles</btn>
-        </div> -->
+       
+      
+    
+      <!-- Menu Modal -->
+<div id="airline" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom" style="width: 1000px; height: 450px;">
+      <div class="w3-container w3-cyan w3-display-container" >
+        <span onclick="document.getElementById('airline').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+       
+        <h1>Register Airline:</h1>
+      </div>
+      <div class="w3-container" style="margin-top: 10px;margin-bottom: 10px">
+        <input type="text" placeholder="Airline Address" id="airline-address" >
+        <input type="text" placeholder="Airline Name" id="airline-name" >
+            <btn class="btn btn-primary" id="register-airline">Register Airline</btn>
+      </div>
+   
+      <div class="w3-container w3-cyan">
+        <h1>Registered Airline Fee:</h1>
+      </div>
+      <div class="w3-container" style="margin-top: 10px;margin-bottom: 10px">
+        <select id="airlines"></select>
+        <input type="text" id="registration-fee" placeholder="Registration Fee">eth</input>
+        <btn class="btn btn-primary" id="pay-fee">Pay Fee</btn>
+      </div>
+      
+    </div>
+  </div>
+   
+  <!-- Contact Modal -->
+  <div id="passenger" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom" style="width: 1000px;height: 450px;">
+      <div class="w3-container w3-cyan">
+        <span onclick="document.getElementById('passenger').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+        <h1>Buy Insurance:</h1>
+      </div>
+      <div class="w3-container" style="margin-top: 10px;margin-bottom: 10px">
+       
+        <select id="passengers" aria-placeholder="passengers">passengers</select>
+        
+        <select id="flights" aria-placeholder="Flight">Flight</select>
+        <input type="text" id="insurance" placeholder="Sum Assured"/>eth
+        <button class="btn btn-primary" id="buy">Buy</button>
 
+        
+      </div>
+      <div class="w3-container w3-cyan" style="margin-top: 10px;margin-bottom: 10px">
+        <h1>Insurance:</h1>
+      </div>
+      <div class="w3-container">
+        <input type="text" id="passenger-address2" placeholder="Passenger Address">
+        <button class="btn btn-primary" id="amtInsured">Amount Insured</button>
+          
+          </div>
+          <div class="w3-container w3-cyan" style="margin-top: 10px;margin-bottom: 20px">
+            <h1>Withdraw:</h1>
+          </div>
+          <div class="w3-container">
+            <input type="text" id="passenger-address" placeholder="Passenger Address">
+        <button class="btn btn-primary" id="withdraw">Withdraw</button>
+              
+              </div>
+        </form>
+      </div>
+    </div>
+  
+ 
+ 
+    <!-- <main class="container">
+
+        
         <div class="row top-20">
             <label class="form"><strong>Register Airline:</strong></label>
             Airline address:<input type="text" id="airline-address">
@@ -78,7 +156,7 @@
         <button class="btn btn-primary" id="withdraw">Withdraw Funds</button>
         
     </main>
-    </div>
+    </div> -->
 
 
 </body>

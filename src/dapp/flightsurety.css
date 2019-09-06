@@ -64,7 +64,10 @@ body {
     color: #fff;
     padding: 40px;
 } */
-
+.w3-button w3-cyan{
+    outline-style: groove;
+    outline: #999999
+}
 
 .cards {
     margin-top: 40px;
@@ -88,9 +91,15 @@ body {
 
 
 .top-20 {
-    margin-top: 20px;
+    margin-top: 100px;
+    margin-left: 5px;
     border: 1px solid white;
     padding: 10px;
+    opacity: 0.9;
+    color: chocolate;
+    background-color: #ecee7a
+    
+    
 }
 
 h5 {
