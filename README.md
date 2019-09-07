@@ -1,6 +1,6 @@
 # FlightSurety
 
-FlightSurety is a Passenger insurance if the flight is delayed by some airline technical reson.
+FlightSurety is a Passenger insurance if the flight is delayed due to airline technical problems. The Passenger buy Insurance of a flight travelling with In case flight is delayed due to airline issue passenger get 1.5 amount back to his ethereum wallet. Airlines register themselves by paying the registration fees.
 
 ## Install
 
