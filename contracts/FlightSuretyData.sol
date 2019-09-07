@@ -27,6 +27,7 @@ contract FlightSuretyData {
     struct Airline{      
         bool isRegistered;
         uint funds;
+        string name;
     }
 
     // Passenger
@@ -50,7 +51,7 @@ contract FlightSuretyData {
     constructor(address _airline) public
     {
         contractOwner = msg.sender;
-        pilotAirline(_airline);
+        pilotAirline(_airline,"PILOTAIRLINE");
     }
 
     /********************************************************************************************/
@@ -214,8 +215,8 @@ contract FlightSuretyData {
     /********************************************************************************************/
 
 
-    function pilotAirline(address _address)internal requireIsOperational{
-        airlines[_address] = Airline({isRegistered :true,funds :0});
+    function pilotAirline(address _address,string _name)internal requireIsOperational{
+        airlines[_address] = Airline({isRegistered :true,funds :0,name:_name});
         registeredAirlines.push(_address); 
     }
 
@@ -225,9 +226,9 @@ contract FlightSuretyData {
     *
     */
     
-    function registerAirline(address _address) external requireIsOperational
+    function registerAirline(address _address,string _name) external requireIsOperational
     {
-        airlines[_address] = Airline({isRegistered:true,funds:0});
+        airlines[_address] = Airline({isRegistered:true,funds:0,name:_name});
         registeredAirlines.push(_address);       
     }
 

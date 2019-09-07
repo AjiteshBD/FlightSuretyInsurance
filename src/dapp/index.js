@@ -12,18 +12,17 @@ import './flightsurety.css';
 
         // Read transaction
         contract.isOperational((error, result) => {
-            console.log(error,result);
-            display('Operational Status', 'Check if contract is operational', [ { label: 'Operational Status', error: error, value: result} ]);
-
+            console.log(contract.flights);
             contract.flights.forEach(flight => {
                 displayList(flight, DOM.elid("flights"));
             });
             contract.airlines.forEach(airline => {
-                displayListAirline(airline, DOM.elid("airlines"));
+                displayAirlines(airline, DOM.elid("airlines"));
             });  
             contract.passengers.forEach(passenger => {
-                displayListPassenger(passenger, DOM.elid("passengers"));
-            });  
+                displayPassengers(passenger, DOM.elid("passengers"));
+            });   
+            display('Operational Status', 'Check if contract is operational', [ { label: 'Operational Status', error: error, value: result} ]);
         });
     
 
@@ -34,7 +33,7 @@ import './flightsurety.css';
             contract.fetchFlightStatus(flight, (error, result) => {
                 display('Oracles', 'Trigger oracles', [ { label: 'Fetch Flight Status', error: error, value: result.flight + ' ' + result.timestamp} ]);
             });
-        })
+        });
     
     });
 
@@ -53,18 +52,20 @@ import './flightsurety.css';
 
     DOM.elid('register-airline').addEventListener('click', () => {
         let airline = DOM.elid('airline-address').value;
-        contract.registerAirline(airline,(error, result) => {
+        let name = DOM.elid('airline-name').value;
+        contract.registerAirline(airline,name,(error, result) => {
             alert("Airline was successfully registered.");
         });
         DOM.elid('airline-address').value = "";
-        displayListAirline(airline, DOM.elid("airlines"));  
+        DOM.elid('airline-name').value="";
+        displayAirlines(airline, DOM.elid("airlines"));  
     });
 
     DOM.elid('pay-fee').addEventListener('click', () => {
         let airline = DOM.elid('airlines').value;
         let fee = DOM.elid('registration-fee').value;
         contract.payAirlineRegistrationFee(airline, fee, (error, result) => {
-            alert("Airline was successfully funded.");
+            alert("Airline Registration fee was Paid successfully.");
         }); 
     });
 
@@ -77,6 +78,15 @@ import './flightsurety.css';
         return contract.airlines;
     });
 
+    
+    DOM.elid('amtInsured').addEventListener('click', () => {
+        let passenger = DOM.elid('passenger-add').value;
+        contract.getInsuranceAmt(passenger, (error, result) => {
+            console.log("insurance SA was successful");
+       });
+        alert(contract.getInsuranceAmt(passenger));
+    });
+
     DOM.elid('withdraw').addEventListener('click', () => {
         let passenger = DOM.elid('passenger-address').value;
         alert(passenger);
@@ -86,14 +96,6 @@ import './flightsurety.css';
             }
             alert("successfully executed.")
        });
-    });
-
-    DOM.elid('amtInsured').addEventListener('click', () => {
-        let passenger = DOM.elid('passenger-address2').value;
-        contract.getInsuranceAmt(passenger, (error, result) => {
-            console.log("insurance SA was successful");
-       });
-        alert(contract.getInsuranceAmt(passenger));
     });
 
     
@@ -109,18 +111,19 @@ function displayList(flight, parentEl) {
     parentEl.add(el);
 }
 
-function displayListAirline(airline, parentEl) {
+function displayAirlines(airline, optionsEL) {
     let el = document.createElement("option");
     el.text = airline;
     el.value = airline;
-    parentEl.add(el);
+    optionsEL.add(el);
+    
 }
 
-function displayListPassenger(passenger, parentEl) {
+function displayPassengers(passenger, optionsEL) {
     let el = document.createElement("option");
     el.text = passenger.account;
     el.value = passenger.account;
-    parentEl.add(el);
+    optionsEL.add(el);
 }
 
 function display(title, description, results) {
@@ -135,7 +138,6 @@ function display(title, description, results) {
         section.appendChild(row);
     })
     displayDiv.append(section);
-
 
 }
 

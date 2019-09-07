@@ -1,4 +1,4 @@
-/* body {
+body {
     background-image: url('flight.jpg'); 
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,84 +11,6 @@
     color: #fff;
     padding: 40px;
 }
-
-.top-20 {
-    margin-top: 20px;
-}
-
-h5 {
-    color: #999999;
-}
-
-section {
-    margin-bottom: 50px;
-}
-
-.field {
-    font-weight: bold;
-    text-align: right;
-}
-
-.field-value {
-    color: #0e7fa8;
-}
-
-label.form {
-    font-size: 14px;
-    margin-right: 20px;
-}
-input {
-    margin-right: 30px;
-} */
-
-
-
-body {
-    background-image: url('flight.jpg'); /* Source: iStockPhoto */
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.container {
-    margin-top: 400px;
-    background-color: #000;
-    opacity: 0.9;
-    color: #fff;
-    padding: 40px;
-}
-
-/* .cards {
-    margin-top: 40px;
-    background-color: #000;
-    opacity: 0.9;
-    color: #fff;
-    padding: 40px;
-} */
-.w3-button w3-cyan{
-    outline-style: groove;
-    outline: #999999
-}
-
-.cards {
-    margin-top: 40px;
-    box-shadow: 0 4px 8px 0 rgba(182, 97, 97, 0.2);
-    transition: 0.3s;
-    background-color: rgb(122, 61, 61);
-    opacity: 0.9;
-    /* width: 40%; */
-    color: rgb(27, 172, 216);
-    padding: 40px;
-  }
-  
-  .cards:hover {
-    box-shadow: 0 8px 16px 0 rgba(241, 235, 235, 0.2);
-  }
-  
-  .cards-container {
-    margin-top: 20px;
-    padding: 2px 16px;
-  }
-
 
 .top-20 {
     margin-top: 100px;
@@ -125,4 +47,7 @@ label.form {
 }
 input {
     margin-right: 30px;
-}
+} 
+
+
+

@@ -23,12 +23,13 @@
         </button>
     </nav>
 
+    <div id="display-wrapper" class="top-20">
+    </div>
+    <div class="row top-20">
+     <label class="form">Flight</label> <input type="text" id="flight-number"> <btn class="btn btn-primary" id="submit-oracle">Submit to Oracles</btn>
+    </div> 
 
-<div id="display-wrapper" class="top-20">
-</div>
-<div class="row top-20">
- <label class="form">Flight</label> <input type="text" id="flight-number"> <btn class="btn btn-primary" id="submit-oracle">Submit to Oracles</btn>
-</div> 
+
      <div class="bgimg w3-display-container w3-text-white " style="margin-left: 350px;">
        
         <div class="w3-display-topleft w3-container w3-xlarge" style="margin-top: 50px;">
@@ -56,10 +57,22 @@
         <h1>Registered Airline Fee:</h1>
       </div>
       <div class="w3-container" style="margin-top: 10px;margin-bottom: 10px">
-        <select id="airlines"></select>
+        <select id="airlines"></select>       
         <input type="text" id="registration-fee" placeholder="Registration Fee">eth</input>
         <btn class="btn btn-primary" id="pay-fee">Pay Fee</btn>
       </div>
+      
+      <!-- <div class="w3-container w3-cyan">
+        <h1>Registered Airline Fee:</h1>
+      </div>
+      <div class="w3-container" style="margin-top: 10px;margin-bottom: 10px">
+        Flight number:<input type="text" id="flight-number"> 
+            Address:<input type="text" id="flight-address"> 
+            Timestamp:<input type="text" id="flight-time">                 
+            <btn class="btn btn-primary" id="submit-oracle">Submit to Oracles</btn>
+      </div> -->
+
+
       
     </div>
   </div>
@@ -85,7 +98,7 @@
         <h1>Insurance:</h1>
       </div>
       <div class="w3-container">
-        <input type="text" id="passenger-address2" placeholder="Passenger Address">
+        <input type="text" id="passenger-add" placeholder="Passenger Address">
         <button class="btn btn-primary" id="amtInsured">Amount Insured</button>
           
           </div>

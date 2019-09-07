@@ -84,7 +84,7 @@ contract('Flight Surety Tests', async (accounts) => {
 
     // ACT
     try {
-        await config.flightSuretyApp.registerAirline(newAirline, {from: config.firstAirline});
+        await config.flightSuretyApp.registerAirline(newAirline,"TESTAIRLINE" ,{from: config.firstAirline});
     }
     catch(e) {
         result = false;
@@ -109,6 +109,21 @@ contract('Flight Surety Tests', async (accounts) => {
     assert.equal(result,false,"Error while buying Insurance");
   });
 
+
+  it(`(Passenger) can withdraw Insurance`,async()=>{
+    let amt = undefined;
+    let result = false;
+
+    try{
+        amt =await config.flightSuretyApp.getInsuranceAmt({from:config.firstAirline});
+        await config.flightSuretyApp.withdraw({from:config.firstAirline,value:amt});
+    }catch(e){
+        result = true;
+        console.log(`ddd:`+amt);
+    }
+    assert.equal(result,false,"Error while withdrawing Insurance");
+  });
+
   it(`(airline) Only registered four airline can register a new airline`,async()=>{
     let newAirline1 = accounts[3];
     let newAirline2 = accounts[4];
@@ -123,17 +138,17 @@ contract('Flight Surety Tests', async (accounts) => {
 
     try{
         await config.flightSuretyApp.payAirlineRegistrationFee(config.firstAirline, {from: config.firstAirline,value:fee});
-        await config.flightSuretyApp.registerAirline(newAirline1, {from: config.firstAirline});
+        await config.flightSuretyApp.registerAirline(newAirline1,"TESTAIRLINE", {from: config.firstAirline});
 
         await config.flightSuretyApp.payAirlineRegistrationFee(newAirline1, {from: newAirline1,value:fee});
-        await config.flightSuretyApp.registerAirline(newAirline2,{from: newAirline1});       
+        await config.flightSuretyApp.registerAirline(newAirline2,"TESTAIRLINE",{from: newAirline1});       
 
         output1 =  await config.flightSuretyData.isAirlineRegistered(newAirline1);       
         output2 =  await config.flightSuretyData.isAirlineRegistered(newAirline2);
       
 
         await config.flightSuretyApp.payAirlineRegistrationFee(newAirline2, {from: newAirline2,value:fee});
-        await config.flightSuretyApp.registerAirline(newAirline3,{from: newAirline2});
+        await config.flightSuretyApp.registerAirline(newAirline3,"TESTAIRLINE",{from: newAirline2});
 
         output3 =  await config.flightSuretyData.isAirlineRegistered(newAirline3);
     }catch(e)
@@ -157,11 +172,11 @@ contract('Flight Surety Tests', async (accounts) => {
     let funds = 10000000000000000000; 
     let result=true;
     try{
-        await config.flightSuretyApp.registerAirline(newAirline2, {from: config.firstAirline});
+        await config.flightSuretyApp.registerAirline(newAirline2,"TESTAIRLINE", {from: config.firstAirline});
         await config.flightSuretyApp.payAirlineRegistrationFee(newAirline2, {from: newAirline2, value: funds}); 
-        await config.flightSuretyApp.registerAirline(newAirline3, {from: newAirline2});
-        await config.flightSuretyApp.registerAirline(newAirline4, {from: config.firstAirline});
-        await config.flightSuretyApp.registerAirline(newAirline, {from: newAirline2});
+        await config.flightSuretyApp.registerAirline(newAirline3,"TESTAIRLINE", {from: newAirline2});
+        await config.flightSuretyApp.registerAirline(newAirline4,"TESTAIRLINE", {from: config.firstAirline});
+        await config.flightSuretyApp.registerAirline(newAirline,"TESTAIRLINE", {from: newAirline2});
         await config.flightSuretyApp.payAirlineRegistrationFee(newAirline4, {from: newAirline2, value: funds});
     
         result = await config.flightSuretyData.isAirlineRegistered.call(newAirline);

@@ -98,9 +98,9 @@ contract FlightSuretyApp {
     * @dev Add an airline to the registration queue
     *
     */
-    function registerAirline(address _address)external requireIsOperational returns(bool success, uint256 votes)
+    function registerAirline(address _address,string _name )external requireIsOperational returns(bool success, uint256 votes)
     {
-        require(flightSuretyData.isAirlineRegistered(msg.sender),"Airline is not registered");
+        require(flightSuretyData.isAirlineRegistered(msg.sender),"Address is not registered");
         require(flightSuretyData.isRegistrationFeePaid(msg.sender),"Registration Fee is not paid");
         require(!flightSuretyData.isAirlineRegistered(_address),"Airline is already registered");
 
@@ -121,11 +121,11 @@ contract FlightSuretyApp {
             if(flightSuretyData.getMultiSigs() >= VOTE.div(2)){
                 votes = flightSuretyData.getMultiSigs();
                 flightSuretyData.clearMultiSig();
-                flightSuretyData.registerAirline(_address);
+                flightSuretyData.registerAirline(_address,_name);
             }
          }else{
             
-            flightSuretyData.registerAirline(_address);
+            flightSuretyData.registerAirline(_address,_name);
          }
         return(success,votes);
     }
@@ -197,7 +197,6 @@ contract FlightSuretyApp {
 
     function withdraw() external payable
     {
-        require(msg.sender==0x53Ab6844553981554565Be456ab3D350E6168Ac904a1,"vsdvsvs");
         uint amt = flightSuretyData.getInsurancePay(msg.sender);
         flightSuretyData.creditBalance(amt);
         flightSuretyData.pay(msg.sender, amt.mul(3).div(2));

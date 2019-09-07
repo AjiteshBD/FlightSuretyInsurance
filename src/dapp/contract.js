@@ -36,16 +36,16 @@ export default class Contract {
 
             }
 
-            //create 5 passengers
+            
             while(this.passengers.length < 3) {
                 this.passengers.push({
                     account: accts[counter++],
-                    passengerFund: 0,
+                    passengerSA: 0,
                 });
             }
 
-            //create 5 flights to display
-            while(this.flights.length < 3) {
+           
+            while(this.flights.length < 5) {
                 this.flights.push({
                     airline: accts[counter++],
                     flight: "Flight" + Math.floor((Math.random() * 10) + 1),
@@ -75,7 +75,7 @@ export default class Contract {
         let result = 0;
         for (var i=0; i < this.passengers.length; i++) {
             if (this.passengers[i].account === passenger) {
-                result = this.passengers[i].passengerFund;
+                result = this.passengers[i].passengerSA;
             }
         }
         return result;
@@ -88,20 +88,17 @@ export default class Contract {
         alert(this.getAmt(passenger));
        
         await self.flightSuretyApp.methods.withdraw().send({from: passenger, value: passengerCurrentFund}, (error, result) => {
-                if(error){
-                    alert(error);
-                }else {
-                    alert(result);
+                
                     callback(result);
-                }
+                
             });
     }
 
     
 
-    async registerAirline(airline, callback){
+    async registerAirline(airline,name, callback){
         let self = this;
-        await self.flightSuretyApp.methods.registerAirline(airline).send({ from: self.owner}, (error, result) => {
+        await self.flightSuretyApp.methods.registerAirline(airline,name).send({ from: self.owner}, (error, result) => {
                 callback(error, result);
             });
     }
@@ -117,7 +114,7 @@ export default class Contract {
     addFunds(passenger, insurance){
         for (var i=0; i < this.passengers.length; i++) {
             if (this.passengers[i].account === passenger) {
-                this.passengers[i].passengerFund = insurance;
+                this.passengers[i].passengerSA = insurance;
             }
         }
     }
@@ -126,7 +123,7 @@ export default class Contract {
         let result = 0;
         for (var i=0; i < this.passengers.length; i++) {
             if (this.passengers[i].account === passenger) {
-                result = this.passengers[i].passengerFund;
+                result = this.passengers[i].passengerSA;
             }
         }
         return result;
@@ -139,10 +136,15 @@ export default class Contract {
             .call({ from: self.owner}, callback);
     }
 
-    fetchFlightStatus(payload, callback) {
+    fetchFlightStatus(flight, callback) {
         let self = this;
+        let payload = {
+            airline: self.airlines[0],
+            flight: flight,
+            timestamp: Math.floor(Date.now() / 1000)
+        } 
         self.flightSuretyApp.methods
-            .fetchFlightStatus(payload.address, payload.flight, payload.time)
+            .fetchFlightStatus(payload.airline, payload.flight, payload.timestamp)
             .send({ from: self.owner}, (error, result) => {
                 callback(error, payload);
             });
